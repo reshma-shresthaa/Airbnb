@@ -13,14 +13,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    list:{
+    listing:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"List"
-    },
-    booking:{
+        ref:"Listing"
+    }],
+    booking:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"booking"
-    }
+        ref:"Booking"
+    }]
 },{timestamps:true})
 
 const User = mongoose.model("User",userSchema)
