@@ -28,15 +28,15 @@ function MyListing() {
       {userData?.listing?.length > 0 ? (
           userData.listing.map((list) => (
             <Card 
-              key={list.id} 
+              key={list._id} 
               title={list.title} 
-              landMark={list.landMark} 
+              landmark={list.landMark} 
               city={list.city} 
               image1={list.image1} 
               image2={list.image2} 
               image3={list.image3} 
               rent={list.rent} 
-              id={list.id}
+              id={list._id}
             />
           ))
         ) : (

@@ -79,7 +79,17 @@ function ListingContext({ children }) {
   }
 }
 
+  const handleViewCard = async (id)=> {
+    
+    try {
+      let result = await axios.get( serverUrl + `/api/listing/findlistingbyid/${id}`,{withCredentials:true})
 
+      console.log(result)
+      navigate("/viewcard")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getListing = async () => {
     try {
@@ -113,7 +123,8 @@ function ListingContext({ children }) {
     setAdding,adding,
     listingData,setListingData,
     newlistData,setNewListData,
-    getListing
+    getListing,
+    handleViewCard
 
   }
   return (
