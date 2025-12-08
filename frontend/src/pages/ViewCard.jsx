@@ -23,6 +23,7 @@ function ViewCard() {
   let [landmark, setLandmark] = useState(cardDetails.landMark)
   let {serverUrl}= useContext(authDataContext)
   let {updating, setUpdating} = useContext(listingDataContext )
+  let {deleting, setDeleting} = useContext(listingDataContext )
 
 
 
@@ -42,7 +43,6 @@ function ViewCard() {
     let result = await axios.post(serverUrl + `/api/listing/update/${cardDetails._id}`, formData, { withCredentials: true, headers: {
           'Content-Type': 'multipart/form-data'
         }})
-    setUpdating(false)
     console.log(result)
     navigate("/")
     setTitle("")
@@ -58,6 +58,19 @@ function ViewCard() {
   } catch (error) {
     console.log(error)
     setUpdating(false)
+  }
+}
+
+const handleDeleteListing = async () => {
+  setDeleting(true)
+  try {
+    let result = await axios.delete(serverUrl + `/api/listing/delete/${cardDetails._id}`,  { withCredentials: true} )
+    console.log(result.data)
+    navigate("/")
+    setDeleting(false)
+  } catch (error) {
+      console.log(error)
+      setDeleting(false)
   }
 }
 
@@ -174,7 +187,13 @@ return (
           <input type="text" id='landmark' className='w-[90%] h-[40px] border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px] text-[black]' required onChange={(e) => setLandmark(e.target.value)} value={landmark} />
         </div>
 
-        <button className='px-[50px] py-[10px] bg-[#f14242] rounded-2xl text-[white] text-[18px] md-px-[100px]' onClick={handleUpdateListing} disabled={updating}>{updating?"updating...":"Update Listing"}</button>
+        <div className='w-[100%] flex items-center justify-center gap-[30px] mt-[20px]'>
+          <button className='px-[10px] py-[10px] bg-[#f14242] rounded-2xl text-[white] text-[15px] md-px-[100px] md:text-[18px] text-nowrap' onClick={handleUpdateListing} disabled={updating}>{updating ? "updating..." : "Update Listing"}</button>
+
+          <button className='px-[10px] py-[10px] bg-[#f14242] rounded-2xl text-[white] text-[15px] md-px-[100px] md:text-[18px] text-nowrap' onClick={handleDeleteListing} disabled={deleting}>{deleting?"Deleting....":"Delete listing"}</button>
+        </div>
+
+        
 
 
 
