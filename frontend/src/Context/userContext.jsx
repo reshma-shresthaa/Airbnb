@@ -68,6 +68,7 @@ function UserContext({ children }) {
     let value = {
         userData,
         setUserData,
+        getCurrentUser,
         loading
 
     }
