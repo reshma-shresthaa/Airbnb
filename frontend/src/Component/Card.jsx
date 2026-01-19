@@ -4,7 +4,7 @@ import { listingDataContext } from '../Context/listingContext'
 import { useNavigate } from 'react-router-dom'
 import { LiaStarSolid } from "react-icons/lia";
 
-function card({title,landmark,image1,image2,image3,rent,city,id,ratings}) {
+function card({title,landmark,image1,image2,image3,rent,city,id,ratings,isBooked,host}) {
   let navigate = useNavigate()
   let {userData}= useContext(userDataContext)
   let {handleViewCard}= useContext(listingDataContext)

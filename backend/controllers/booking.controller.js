@@ -26,7 +26,7 @@ export const createBooking = async (req, res) => {
       listing: listing._id
     })
     let user = await User.findByIdAndUpdate(req.userId, {
-      $push: { booking: booking._id }
+      $push:{booking:listing}
     }, { new: true })
     if (!user) {
       return res.status(404).json({ message: "Sorry! User not found." })
