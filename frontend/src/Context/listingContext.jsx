@@ -28,6 +28,7 @@ function ListingContext({ children }) {
   let [cardDetails,setCardDetails] = useState(null)
   let [searchData,setSearchData]=useState([])
   let [searchQuery, setSearchQuery] = useState("")
+  let [loading, setLoading] = useState(true)
 
   
   let { serverUrl } = useContext(authDataContext)
@@ -126,6 +127,7 @@ function ListingContext({ children }) {
 
 
   const getListing = async () => {
+    setLoading(true)
     try {
       let result = await axios.get( serverUrl + "/api/listing/get",{withCredentials:true})
       
@@ -134,6 +136,8 @@ function ListingContext({ children }) {
 
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false)
     }
   }
   useEffect(()=>{
@@ -163,7 +167,8 @@ function ListingContext({ children }) {
     updating, setUpdating,
     deleting, setDeleting,
     handleSearch, searchData,setSearchData,
-    searchQuery, setSearchQuery
+    searchQuery, setSearchQuery,
+    loading
 
   }
   return (
